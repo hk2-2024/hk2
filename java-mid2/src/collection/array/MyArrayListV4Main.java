@@ -1,12 +1,12 @@
 package collection.array;
 
-public class MyArrayListV3Main {
+public class MyArrayListV4Main {
     public static void main(String[] args) {
-        MyArrayListV3 list = new MyArrayListV3();
+        MyArrayListV4<String > list = new MyArrayListV4<>();
 
         list.add("a");
         list.add("b");
-        list.add("c");
+        list.add("C");
         System.out.println(list);
 
         list.add(2, "add List");
