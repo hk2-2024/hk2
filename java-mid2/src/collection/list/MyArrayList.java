@@ -1,19 +1,19 @@
-package collection.array;
+package collection.list;
 
 //import java.util.Arrays;
 
 import java.util.Arrays;
 
-public class MyArrayListV4<E > {
+public class MyArrayList<E> implements MyList<E> {
     private static final int DEFAULT_CAPACITY=5;
     private  Object[] elementData;
     private int size =0;
 
-    public MyArrayListV4() {
+    public MyArrayList() {
         elementData = new Object[DEFAULT_CAPACITY];
     }
 
-    public MyArrayListV4(int initialCapacity) {
+    public MyArrayList(int initialCapacity) {
         this.elementData = new Object[initialCapacity];
     }
 
@@ -21,6 +21,7 @@ public class MyArrayListV4<E > {
         return size;
     }
 
+    @Override
     public void add(E e) {
         if (size == elementData.length) {
             grow();
@@ -30,6 +31,7 @@ public class MyArrayListV4<E > {
         size++;
     }
 
+    @Override
     public void add(int index, E e) {
         if (size == elementData.length) {
             grow();
@@ -46,10 +48,12 @@ public class MyArrayListV4<E > {
         }
     }
     @SuppressWarnings("unchecked")
+    @Override
     public E get(int index) {
         return (E) elementData[index];
     }
 
+    @Override
     public E remove(int index) {
         E oldValue = get(index);
         shiftLeftFrom(index);
@@ -73,7 +77,7 @@ public class MyArrayListV4<E > {
     }
 
 
-
+    @Override
     public E set(int index, E element) {
         if (index >= elementData.length) {
             throw new RuntimeException();
@@ -83,7 +87,8 @@ public class MyArrayListV4<E > {
         return oldValue;
     }
 
-    public int indexOf(Object o) {
+    @Override
+    public int indexOf(E o) {
         for (int i = 0; i < size; i++) {
             if (o.equals(elementData[i])) {
                 return i;

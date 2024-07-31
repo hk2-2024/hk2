@@ -3,32 +3,35 @@ package collection.set;
 import java.util.Arrays;
 import java.util.LinkedList;
 
-public class MyHashSetV1 {
+public class MyHashSetV2 {
     //private int[] elementData = new int[10];
     private static final int CAPA = 16;
 
-    LinkedList<Integer>[] buckets;
+    private LinkedList<Object>[] buckets;
     private int size=0;
     private int capacity = CAPA;
 
-    public MyHashSetV1() {
-        buckets = new LinkedList[capacity];
-        for (int i = 0; i < capacity; i++) {
-            buckets[i] = new LinkedList<>();
-        }
+    public MyHashSetV2() {
+        initBuckets();
     }
-
-    public MyHashSetV1(int capacity) {
+    public MyHashSetV2(int capacity) {
         this.capacity = capacity;
+        initBuckets();
+
+    }
+
+    private void initBuckets() {
         buckets = new LinkedList[capacity];
         for (int i = 0; i < capacity; i++) {
             buckets[i] = new LinkedList<>();
         }
     }
 
-    public boolean add(int value) {
+
+
+    public boolean add(Object value) {
         int index = hashIndex(value);
-        LinkedList<Integer> bucket = buckets[index];
+        LinkedList<Object> bucket = buckets[index];
 
         if (bucket.contains(value)) {
             return false;
@@ -39,10 +42,10 @@ public class MyHashSetV1 {
         return true;
     }
 
-    public boolean remove(int value) {
+    public boolean remove(Object value) {
         int index = hashIndex(value);
-        LinkedList<Integer> bucket = buckets[index];
-        boolean result = bucket.remove(Integer.valueOf(value));
+        LinkedList<Object> bucket = buckets[index];
+        boolean result = bucket.remove(value);
         if (result) {
             size--;
             return true;
@@ -50,9 +53,9 @@ public class MyHashSetV1 {
         return false;
     }
 
-    public boolean contains(int value) {
+    public boolean contains(Object value) {
         int index = hashIndex(value);
-        LinkedList<Integer> bucket = buckets[index];
+        LinkedList<Object> bucket = buckets[index];
         if (bucket.contains(value)) {
             return true;
         }
@@ -66,13 +69,13 @@ public class MyHashSetV1 {
 
     @Override
     public String toString() {
-        return "MyHashSetV1{" +
+        return "MyHashSetV2{" +
                 "buckets=" + Arrays.toString(buckets) +
                 ", size=" + size +
                 '}';
     }
 
-    private  int hashIndex(int searchValue) {
-        return searchValue% capacity;
+    private  int hashIndex(Object searchValue) {
+        return Math.abs(searchValue.hashCode())% capacity;
     }
 }

@@ -1,21 +1,26 @@
 package collection.set;
 
-public class MyHashSetV2Main {
+import collection.set.member.Member;
+
+public class MyHashSetV2Main2 {
     public static void main(String[] args) {
         MyHashSetV2 set = new MyHashSetV2(10);
-        set.add("A");
-        set.add("B");
-        set.add("C");
-        set.add("F");
-        set.add("AB");
-        set.add("SET");
+
+        Member hi = new Member("hi");
+        Member jpa = new Member("JPA"); //대문자 주의!
+        Member java = new Member("java");
+        Member spring = new Member("spring");
+        System.out.println("hi.hashCode() = " + hi.hashCode());
+        System.out.println("jpa.hashCode() = " + jpa.hashCode());
+        System.out.println("java.hashCode() = " + java.hashCode());
+        System.out.println("spring.hashCode() = " + spring.hashCode());
+        set.add(hi);
+        set.add(jpa);
+        set.add(java);
+        set.add(spring);
         System.out.println(set);
-        System.out.println("A.hashCode=" + "A".hashCode());
-        System.out.println("B.hashCode=" + "B".hashCode());
-        System.out.println("AB.hashCode=" + "AB".hashCode());
-        System.out.println("SET.hashCode=" + "SET".hashCode());
-        //검색
-        String searchValue = "SET";
+
+        Member searchValue = new Member("JPA");
         boolean result = set.contains(searchValue);
         System.out.println("set.contains(" + searchValue + ") = " + result);
     }

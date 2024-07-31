@@ -3,7 +3,7 @@ package collection.list.test.ex2;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShoppingCart {
+public class ShoppingCart2 {
     private List<String> listName = new ArrayList<>();
     private List<Integer> listTotal = new ArrayList<>();
 

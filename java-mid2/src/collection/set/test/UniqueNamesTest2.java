@@ -1,17 +1,16 @@
 package collection.set.test;
 
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.*;
 
-public class UniqueNamesTest1 {
+public class UniqueNamesTest2 {
     public static void main(String[] args) {
         Integer[] inputArr = {30, 20, 20, 10, 10};
         // 코드 작성
-        HashSet<Integer> hashSet = new HashSet<>();
+        Set<Integer> hashSet = new LinkedHashSet<>(List.of(inputArr));
 
-        for (int i = 0; i < inputArr.length; i++) {
+       /* for (int i = 0; i < inputArr.length; i++) {
             hashSet.add(inputArr[i]);
-        }
+        }*/
 
         System.out.println("hashSet = " + hashSet);
         Iterator<Integer> iter = hashSet.iterator();

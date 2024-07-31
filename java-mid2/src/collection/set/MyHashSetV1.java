@@ -1,26 +1,63 @@
 package collection.set;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 
-public class MyHashSetV0 {
-    private int[] elementData = new int[10];
+public class MyHashSetV1 {
+    //private int[] elementData = new int[10];
+    private static final int CAPA = 16;
+
+    LinkedList<Integer>[] buckets;
     private int size=0;
+    private int capacity = CAPA;
+
+    public MyHashSetV1() {
+        buckets = new LinkedList[capacity];
+        for (int i = 0; i < capacity; i++) {
+            buckets[i] = new LinkedList<>();
+        }
+    }
+
+    public MyHashSetV1(int capacity) {
+        this.capacity = capacity;
+        buckets = new LinkedList[capacity];
+        for (int i = 0; i < capacity; i++) {
+            buckets[i] = new LinkedList<>();
+        }
+    }
 
     public boolean add(int value) {
-        if (contains(value)) {
+        int index = hashIndex(value);
+        LinkedList<Integer> bucket = buckets[index];
+
+        if (bucket.contains(value)) {
             return false;
         }
-        elementData[size] = value;
+        bucket.add(value);
         size++;
+
         return true;
     }
-    public boolean contains(int value) {
-        for (int data : elementData) {
-            if (data == value) {
-                return true;
-            }
+
+    public boolean remove(int value) {
+        int index = hashIndex(value);
+        LinkedList<Integer> bucket = buckets[index];
+        boolean result = bucket.remove(Integer.valueOf(value));
+        if (result) {
+            size--;
+            return true;
         }
         return false;
+    }
+
+    public boolean contains(int value) {
+        int index = hashIndex(value);
+        LinkedList<Integer> bucket = buckets[index];
+        if (bucket.contains(value)) {
+            return true;
+        }
+        return false;
+
     }
 
     public int getSize() {
@@ -29,9 +66,13 @@ public class MyHashSetV0 {
 
     @Override
     public String toString() {
-        return "MyHashSetV0{" +
-                "elementData=" + Arrays.toString(Arrays.copyOf(elementData,size))  +
+        return "MyHashSetV1{" +
+                "buckets=" + Arrays.toString(buckets) +
                 ", size=" + size +
                 '}';
+    }
+
+    private  int hashIndex(int searchValue) {
+        return searchValue% capacity;
     }
 }

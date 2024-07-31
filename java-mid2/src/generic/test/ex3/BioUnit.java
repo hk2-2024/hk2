@@ -1,2 +1,30 @@
-package generic.test.ex3;public class BioUnit {
+package generic.test.ex3;
+
+public class BioUnit {
+    private String name;
+    private  int hp;
+
+    public BioUnit(String name, int hp) {
+        this.name = name;
+        this.hp = hp;
+    }
+
+    public String getName() {
+        return name;
+    }
+    public int getHp() {
+        return hp;
+    }
+
+//    public BioUnit<BioUnit> get() {
+//        return this;
+//    }
+
+    @Override
+    public String toString() {
+        return "BioUnit{" +
+                "name='" + name + '\'' +
+                ", hp=" + hp +
+                '}';
+    }
 }
